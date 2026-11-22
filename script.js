@@ -157,3 +157,33 @@ if (footerYear) {
 
   updateJourney();
 })();
+/* INTERACTIVE GLOBE ROTATION */
+(() => {
+  const container = document.querySelector(".globe-container");
+  const globe = document.querySelector(".globe");
+
+  if (!container || !globe) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  container.addEventListener("pointermove", (event) => {
+    if (event.pointerType !== "mouse" || reducedMotion.matches) return;
+
+    const rect = container.getBoundingClientRect();
+
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    globe.style.animationPlayState = "paused";
+
+    globe.style.transform =
+      `translateY(-8px) rotateX(${-y * 22}deg) rotateY(${x * 28}deg)`;
+  });
+
+  container.addEventListener("pointerleave", () => {
+    globe.style.transform = "";
+    globe.style.animationPlayState = "";
+  });
+})();
