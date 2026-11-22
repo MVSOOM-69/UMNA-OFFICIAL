@@ -157,7 +157,7 @@ if (footerYear) {
 
   updateJourney();
 })();
-/* INTERACTIVE GLOBE ROTATION */
+/* SMOOTH CURSOR-FOLLOWING GLOBE */
 (() => {
   const container = document.querySelector(".globe-container");
   const globe = document.querySelector(".globe");
@@ -168,6 +168,31 @@ if (footerYear) {
     "(prefers-reduced-motion: reduce)"
   );
 
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  let animationFrame;
+
+  function animate() {
+    currentX += (targetX - currentX) * 0.12;
+    currentY += (targetY - currentY) * 0.12;
+
+    globe.style.transform =
+      `translate3d(${currentX}px, ${currentY}px, 0) ` +
+      `rotateX(${-currentY * 0.35}deg) ` +
+      `rotateY(${currentX * 0.35}deg)`;
+
+    if (
+      Math.abs(targetX - currentX) > 0.1 ||
+      Math.abs(targetY - currentY) > 0.1
+    ) {
+      animationFrame = requestAnimationFrame(animate);
+    } else {
+      animationFrame = null;
+    }
+  }
+
   container.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse" || reducedMotion.matches) return;
 
@@ -176,14 +201,28 @@ if (footerYear) {
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-    globe.style.animationPlayState = "paused";
+    targetX = x * 65;
+    targetY = y * 65;
 
-    globe.style.transform =
-      `translateY(-8px) rotateX(${-y * 22}deg) rotateY(${x * 28}deg)`;
+    globe.classList.add("is-interacting");
+
+    if (!animationFrame) {
+      animationFrame = requestAnimationFrame(animate);
+    }
   });
 
   container.addEventListener("pointerleave", () => {
-    globe.style.transform = "";
-    globe.style.animationPlayState = "";
+    targetX = 0;
+    targetY = 0;
+
+    if (!reducedMotion.matches) {
+      globe.classList.remove("is-interacting");
+    }
+
+    if (!animationFrame) {
+      animationFrame = requestAnimationFrame(animate);
+    }
   });
 })();
+
+  
