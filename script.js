@@ -158,71 +158,37 @@ if (footerYear) {
   updateJourney();
 })();
 /* SMOOTH CURSOR-FOLLOWING GLOBE */
+/* DIRECT CURSOR FOLLOWING */
 (() => {
   const container = document.querySelector(".globe-container");
   const globe = document.querySelector(".globe");
 
   if (!container || !globe) return;
 
-  const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  );
-
-  let targetX = 0;
-  let targetY = 0;
-  let currentX = 0;
-  let currentY = 0;
-  let animationFrame;
-
-  function animate() {
-    currentX += (targetX - currentX) * 0.12;
-    currentY += (targetY - currentY) * 0.12;
-
-    globe.style.transform =
-      `translate3d(${currentX}px, ${currentY}px, 0) ` +
-      `rotateX(${-currentY * 0.35}deg) ` +
-      `rotateY(${currentX * 0.35}deg)`;
-
-    if (
-      Math.abs(targetX - currentX) > 0.1 ||
-      Math.abs(targetY - currentY) > 0.1
-    ) {
-      animationFrame = requestAnimationFrame(animate);
-    } else {
-      animationFrame = null;
-    }
-  }
-
   container.addEventListener("pointermove", (event) => {
-    if (event.pointerType !== "mouse" || reducedMotion.matches) return;
+    if (event.pointerType !== "mouse") return;
 
     const rect = container.getBoundingClientRect();
 
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
 
-    targetX = x * 65;
-    targetY = y * 65;
+    const moveX = (x - 0.5) * 100;
+    const moveY = (y - 0.5) * 100;
 
-    globe.classList.add("is-interacting");
+    const rotateY = (x - 0.5) * 35;
+    const rotateX = (0.5 - y) * 35;
 
-    if (!animationFrame) {
-      animationFrame = requestAnimationFrame(animate);
-    }
+    globe.style.transform =
+      `translate(${moveX}px, ${moveY}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   });
 
   container.addEventListener("pointerleave", () => {
-    targetX = 0;
-    targetY = 0;
-
-    if (!reducedMotion.matches) {
-      globe.classList.remove("is-interacting");
-    }
-
-    if (!animationFrame) {
-      animationFrame = requestAnimationFrame(animate);
-    }
+    globe.style.transform =
+      "translate(0, 0) rotateX(0deg) rotateY(0deg)";
   });
 })();
+
+
 
   
