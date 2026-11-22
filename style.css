@@ -1775,3 +1775,86 @@ button {
   transition: transform 0.08s linear;
   will-change: transform;
 }
+/* UMNA CINEMATIC PRELOADER */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #861D2B;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-content {
+  width: min(320px, 80%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.preloader-content img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 25px;
+  animation: preloader-logo 2s ease-in-out infinite;
+}
+
+.preloader-content > span {
+  color: white;
+  font-family: var(--serif);
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.preloader-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,.25);
+  margin: 35px 0 15px;
+  overflow: hidden;
+}
+
+.preloader-line-fill {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: preloader-progress 2s ease forwards;
+}
+
+.preloader-content small {
+  color: rgba(255,255,255,.65);
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+@keyframes preloader-logo {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@keyframes preloader-progress {
+  to { transform: scaleX(1); }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .preloader-content img,
+  .preloader-line-fill {
+    animation: none;
+  }
+
+  .preloader-line-fill {
+    transform: scaleX(1);
+  }
+}
