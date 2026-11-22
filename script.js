@@ -107,3 +107,53 @@ const footerYear = document.querySelector(".footer small");
 if (footerYear) {
   footerYear.textContent = `© ${new Date().getFullYear()} UMNA. All rights reserved.`;
 }
+/* CINEMATIC HORIZONTAL SCROLL */
+(() => {
+  const section = document.querySelector("#journey");
+  const track = document.querySelector("#journey-track");
+  const counter = document.querySelector("#journey-current");
+
+  if (!section || !track) return;
+
+  let ticking = false;
+
+  function updateJourney() {
+    ticking = false;
+
+    if (window.innerWidth <= 650) {
+      track.style.transform = "none";
+      return;
+    }
+
+    const rect = section.getBoundingClientRect();
+    const scrollableDistance = section.offsetHeight - window.innerHeight;
+
+    const progress = Math.max(
+      0,
+      Math.min(1, -rect.top / scrollableDistance)
+    );
+
+    const visibleWidth = window.innerWidth * 0.52;
+    const maxMove = Math.max(0, track.scrollWidth - visibleWidth);
+
+    track.style.transform =
+      `translate3d(${-progress * maxMove}px, 0, 0)`;
+
+    if (counter) {
+      const current = Math.min(4, Math.floor(progress * 4) + 1);
+      counter.textContent = String(current).padStart(2, "0");
+    }
+  }
+
+  function requestUpdate() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(updateJourney);
+    }
+  }
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+
+  updateJourney();
+})();
