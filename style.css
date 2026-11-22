@@ -1572,3 +1572,203 @@ button {
     min-height: 0;
   }
 }
+/* UMNA GLOBAL 3D GLOBE */
+.global-section {
+  min-height: 850px;
+  padding: 140px 7%;
+  background: #F3EFEC;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5%;
+  overflow: hidden;
+}
+
+.global-content {
+  position: relative;
+  z-index: 2;
+}
+
+.global-content h2 {
+  font-family: var(--serif);
+  font-size: clamp(45px, 6vw, 78px);
+  font-weight: 400;
+  line-height: 1.05;
+  margin: 35px 0 25px;
+}
+
+.global-content h2 span {
+  color: var(--burgundy);
+}
+
+.global-content p {
+  max-width: 430px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
+}
+
+.global-link {
+  display: inline-flex;
+  gap: 30px;
+  margin-top: 40px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--burgundy);
+  color: var(--burgundy);
+  font-size: 12px;
+}
+
+.globe-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 570px;
+  perspective: 1000px;
+}
+
+.globe-glow {
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(173,57,72,.20), transparent 70%);
+  filter: blur(25px);
+}
+
+.globe {
+  width: 360px;
+  height: 360px;
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid rgba(134,29,43,.6);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,.95), transparent 35%),
+    radial-gradient(circle at 70% 75%, rgba(134,29,43,.18), transparent 50%),
+    linear-gradient(135deg,#F7E9E7,#D9B7B6);
+  box-shadow:
+    inset -25px -15px 55px rgba(134,29,43,.25),
+    inset 15px 10px 35px rgba(255,255,255,.8),
+    0 25px 70px rgba(70,20,30,.15);
+  transform-style: preserve-3d;
+  animation: globe-float 7s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.globe-latitude,
+.globe-longitude {
+  position: absolute;
+  border: 1px solid rgba(134,29,43,.45);
+  border-radius: 50%;
+  inset: 0;
+}
+
+.latitude-one {
+  transform: scaleY(.35);
+}
+
+.latitude-two {
+  transform: scaleY(.7);
+}
+
+.longitude-one {
+  transform: scaleX(.35);
+}
+
+.longitude-two {
+  transform: scaleX(.7);
+}
+
+.longitude-three {
+  transform: scaleX(.9);
+}
+
+.globe-orbit {
+  position: absolute;
+  width: 145%;
+  height: 45%;
+  left: -22%;
+  top: 27%;
+  border: 1px solid rgba(134,29,43,.35);
+  border-radius: 50%;
+}
+
+.orbit-one {
+  transform: rotate(-25deg);
+}
+
+.orbit-two {
+  transform: rotate(35deg);
+}
+
+.globe-point {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: #861D2B;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(134,29,43,.8);
+  animation: globe-pulse 2s ease-in-out infinite;
+}
+
+.point-one {
+  top: 30%;
+  left: 62%;
+}
+
+.point-two {
+  top: 58%;
+  left: 32%;
+  animation-delay: .5s;
+}
+
+.point-three {
+  top: 70%;
+  left: 70%;
+  animation-delay: 1s;
+}
+
+.globe-caption {
+  position: absolute;
+  bottom: 30px;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--burgundy);
+}
+
+@keyframes globe-float {
+  0%,100% { transform: translateY(0) rotateY(-8deg); }
+  50% { transform: translateY(-18px) rotateY(8deg); }
+}
+
+@keyframes globe-pulse {
+  0%,100% { box-shadow: 0 0 8px rgba(134,29,43,.4); }
+  50% { box-shadow: 0 0 22px rgba(134,29,43,.9); }
+}
+
+@media(max-width:750px) {
+  .global-section {
+    grid-template-columns: 1fr;
+    padding: 100px 7%;
+  }
+
+  .globe-container {
+    min-height: 450px;
+  }
+
+  .globe {
+    width: 290px;
+    height: 290px;
+  }
+
+  .globe-caption {
+    bottom: 0;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .globe,
+  .globe-point {
+    animation: none;
+  }
+}
