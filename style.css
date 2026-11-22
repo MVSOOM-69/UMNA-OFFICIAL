@@ -770,3 +770,130 @@ button {
     padding: 35px 25px;
   }
 }
+/* HOW UMNA WORKS */
+
+.research-intro,
+.why-heading {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 10%;
+  align-items: end;
+}
+
+.research-intro > p,
+.why-heading > p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 75px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+}
+
+.process-card {
+  position: relative;
+  min-height: 340px;
+  padding: 35px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  transition: .4s ease;
+}
+
+.process-card:hover {
+  background: #F0EAE7;
+  transform: translateY(-5px);
+}
+
+.process-card > span,
+.why-card > span {
+  color: var(--burgundy);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.process-icon {
+  margin-top: 55px;
+  color: var(--burgundy);
+  font-family: var(--serif);
+  font-size: 38px;
+}
+
+.process-card h3,
+.why-card h3 {
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-top: 20px;
+}
+
+.process-card p,
+.why-card p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+  margin-top: 15px;
+}
+
+/* WHY UMNA */
+
+.why-umna {
+  background: #F0EAE7;
+}
+
+.why-heading {
+  margin-bottom: 75px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid rgba(0,0,0,.13);
+  border-left: 1px solid rgba(0,0,0,.13);
+}
+
+.why-card {
+  min-height: 270px;
+  padding: 40px;
+  border-right: 1px solid rgba(0,0,0,.13);
+  border-bottom: 1px solid rgba(0,0,0,.13);
+  transition: .35s ease;
+}
+
+.why-card:hover {
+  background: var(--white);
+}
+
+.why-card h3 {
+  max-width: 350px;
+  font-size: 30px;
+}
+
+@media (max-width: 650px) {
+  .research-intro,
+  .why-heading {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-card {
+    min-height: 280px;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-card {
+    padding: 30px 25px;
+  }
+}
