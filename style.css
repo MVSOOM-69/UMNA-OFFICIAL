@@ -1651,7 +1651,6 @@ button {
     inset 15px 10px 35px rgba(255,255,255,.8),
     0 25px 70px rgba(70,20,30,.15);
   transform-style: preserve-3d;
-  animation: globe-float 7s ease-in-out infinite;
   overflow: hidden;
 }
 
@@ -1772,9 +1771,7 @@ button {
     animation: none;
   }
 }
-/* GLOBE INTERACTION FIX */
-.globe.is-interacting {
-  animation: none !important;
+.globe {
   transition: transform 0.08s linear;
   will-change: transform;
 }
