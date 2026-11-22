@@ -1772,3 +1772,9 @@ button {
     animation: none;
   }
 }
+/* GLOBE INTERACTION FIX */
+.globe.is-interacting {
+  animation: none !important;
+  transition: transform 0.08s linear;
+  will-change: transform;
+}
