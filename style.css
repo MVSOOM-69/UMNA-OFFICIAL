@@ -897,3 +897,118 @@ button {
     padding: 30px 25px;
   }
 }
+
+/* COMPLETE UMNA SERVICES */
+
+.services-intro {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 10%;
+  align-items: end;
+  margin-bottom: 75px;
+}
+
+.services-intro > p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid rgba(0,0,0,.15);
+  border-left: 1px solid rgba(0,0,0,.15);
+}
+
+.service-card {
+  min-height: 390px;
+  padding: 42px;
+  position: relative;
+  border-right: 1px solid rgba(0,0,0,.15);
+  border-bottom: 1px solid rgba(0,0,0,.15);
+  transition: background .4s ease, transform .4s ease;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  background: var(--white);
+}
+
+.service-number {
+  color: var(--burgundy);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.service-symbol {
+  font-family: var(--serif);
+  font-size: 38px;
+  color: var(--crimson);
+  margin-top: 45px;
+}
+
+.service-card h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(25px, 3vw, 34px);
+  margin-top: 18px;
+}
+
+.service-card p {
+  max-width: 470px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2;
+}
+
+.service-arrow {
+  position: absolute;
+  right: 35px;
+  top: 35px;
+  font-size: 20px;
+  color: var(--burgundy);
+  transition: transform .3s;
+}
+
+.service-card:hover .service-arrow {
+  transform: translate(5px, -5px);
+}
+
+.services-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 55px;
+  padding: 25px 0;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--burgundy);
+}
+
+@media (max-width: 650px) {
+  .services-intro {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    min-height: auto;
+    padding: 32px 25px 45px;
+  }
+
+  .service-symbol {
+    margin-top: 35px;
+  }
+
+  .services-bottom {
+    line-height: 2;
+  }
+}
