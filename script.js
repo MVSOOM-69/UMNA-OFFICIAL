@@ -188,7 +188,25 @@ if (footerYear) {
       "translate(0, 0) rotateX(0deg) rotateY(0deg)";
   });
 })();
+/* UMNA PRELOADER ACTIVATION */
+(() => {
+  const preloader = document.querySelector("#preloader");
 
+  if (!preloader) return;
+
+  function hidePreloader() {
+    preloader.classList.add("hidden");
+    document.body.classList.add("page-loaded");
+  }
+
+  if (document.readyState === "complete") {
+    setTimeout(hidePreloader, 1200);
+  } else {
+    window.addEventListener("load", () => {
+      setTimeout(hidePreloader, 1200);
+    }, { once: true });
+  }
+})();
 
 
   
